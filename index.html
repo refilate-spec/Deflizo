@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NEXUS — Premium Digital Hub, Apps, Cards & Financial Services</title>
+    <meta name="description" content="Discover verified APKs, SaaS tools, banking accounts, digital cards, credit offers, and premium games in one clean store.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#2563eb',
+                            red: '#ef4444',
+                            pink: '#ec4899',
+                            dark: '#090d16',
+                            surface: '#111827',
+                            emerald: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+                    },
+                    aspectRatio: {
+                        '12/9': '12 / 9',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .dark .glass-nav {
+            background: rgba(9, 13, 22, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+        .dark .skeleton {
+            background: linear-gradient(90deg, #111827 25%, #1f2937 50%, #111827 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200 antialiased min-h-screen pb-20 md:pb-8">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 text-center font-medium border-b border-slate-800 flex justify-between items-center">
+        <div class="hidden sm:flex items-center space-x-2">
+            <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold">100% Verified</span>
+            <span>Direct APK Downloads, Premium SaaS Subscriptions & Digital Banking Hub</span>
+        </div>
+        <div class="mx-auto sm:mx-0 flex items-center space-x-4 text-[11px]">
+            <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> Safe & Secure</span>
+            <span><i class="fa-solid fa-bolt text-amber-400 mr-1"></i> Instant Activation</span>
+        </div>
+    </div>
+
+    <!-- STICKY HEADER -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80 dark:border-slate-800/80 transition-all duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 gap-3">
+                
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <a href="#" onclick="resetAllState()" class="flex items-center space-x-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-emerald-500 flex items-center justify-center text-white font-extrabold text-lg shadow-lg shadow-blue-500/20">
+                            <i class="fa-solid fa-cubes"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-lg font-black tracking-tight leading-none bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-500 bg-clip-text text-transparent">
+                                NEXUS
+                            </span>
+                            <span class="text-[9px] font-bold tracking-widest text-slate-400 uppercase leading-none mt-0.5">DIGITAL HUB</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-xl mx-4">
+                    <div class="relative w-full">
+                        <input type="text" id="searchInputDesktop" oninput="handleSearchInput(this.value)" placeholder="Search APK games, SaaS tools, credit cards, loans..." 
+                               class="w-full pl-10 pr-24 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-blue-500 rounded-full text-xs font-medium focus:outline-none transition shadow-inner dark:text-white">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-slate-400 text-xs"></i>
+                        <button onclick="openAISearchModal()" class="absolute right-1 top-1 bottom-1 px-3 bg-slate-900 hover:bg-slate-800 text-emerald-400 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-semibold rounded-full transition flex items-center gap-1.5 border border-emerald-500/30">
+                            <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i> AI Search
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Icons -->
+                <div class="flex items-center space-x-1 sm:space-x-2">
+                    <button onclick="toggleMobileSearch()" class="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 rounded-xl" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass text-base"></i>
+                    </button>
+
+                    <button onclick="openAISearchModal()" class="md:hidden p-2 text-emerald-500 hover:text-emerald-600" aria-label="AI Search">
+                        <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
+                    </button>
+
+                    <button id="themeToggle" onclick="toggleTheme()" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 rounded-xl transition" aria-label="Toggle Theme">
+                        <i class="fa-solid fa-moon text-base dark:hidden"></i>
+                        <i class="fa-solid fa-sun text-base hidden dark:block text-amber-400"></i>
+                    </button>
+
+                    <button onclick="toggleFilterDrawer()" class="p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 rounded-xl relative" aria-label="Open Filters">
+                        <i class="fa-solid fa-sliders text-base"></i>
+                        <span id="filterBadge" class="hidden absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-blue-500"></span>
+                    </button>
+
+                    <button onclick="setActiveTab('wishlist')" class="p-2 text-slate-600 dark:text-slate-300 hover:text-pink-500 rounded-xl relative" aria-label="Saved Items">
+                        <i class="fa-solid fa-bookmark text-base"></i>
+                        <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar (Expandable) -->
+            <div id="mobileSearchBar" class="hidden md:hidden pb-3 pt-1">
+                <div class="relative w-full">
+                    <input type="text" id="searchInputMobile" oninput="handleSearchInput(this.value)" placeholder="Search APKs, SaaS, Banks, Cards, Loans..." 
+                           class="w-full pl-9 pr-8 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs focus:outline-none dark:text-white">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    <button onclick="clearSearch()" class="absolute right-2 top-2 text-slate-400 text-xs p-1">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- SPACIOUS & WIDE CLEAN HERO BANNER -->
+        <section id="heroSection" class="relative overflow-hidden rounded-3xl bg-slate-900 border border-slate-800/80 text-white p-8 sm:p-12 lg:p-14 mb-10 shadow-2xl">
+            <!-- Ambient Background Glows -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-slate-700/80 text-xs font-semibold text-emerald-400 shadow-sm">
+                        <i class="fa-solid fa-circle-check text-xs"></i> Verified Apps, Fintech & Pro SaaS Store
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight sm:leading-none">
+                        Instant Access to <br class="hidden sm:inline"/>
+                        <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-emerald-400 bg-clip-text text-transparent">Digital Apps, Cards & Services</span>
+                    </h1>
+                    
+                    <p class="text-xs sm:text-sm lg:text-base text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Explore verified MOD APKs, top-rated Android tools, lifetime SaaS accounts, instant digital credit cards, and instant-approval loan apps in one clean hub.
+                    </p>
+                    
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <button onclick="scrollToGrid()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-xl shadow-blue-600/25 transition">
+                            <i class="fa-solid fa-rocket mr-2"></i> Explore All Offers
+                        </button>
+                        <button onclick="openAISearchModal()" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold text-xs sm:text-sm rounded-xl transition flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i> Smart AI Search
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Hero Feature Cards -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div class="glass-card p-4 rounded-2xl border border-slate-800/80 text-center hover:border-slate-700 transition">
+                        <div class="w-10 h-10 mx-auto rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2 text-lg">
+                            <i class="fa-solid fa-android"></i>
+                        </div>
+                        <h2 class="text-xs sm:text-sm font-bold text-white">APK & Games</h2>
+                        <p class="text-[11px] text-slate-400 mt-0.5">1:1 & 16:9 MODs</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl border border-slate-800/80 text-center hover:border-slate-700 transition">
+                        <div class="w-10 h-10 mx-auto rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-2 text-lg">
+                            <i class="fa-solid fa-credit-card"></i>
+                        </div>
+                        <h2 class="text-xs sm:text-sm font-bold text-white">Cards & Banking</h2>
+                        <p class="text-[11px] text-slate-400 mt-0.5">12:9 Virtual Cards</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl border border-slate-800/80 text-center hover:border-slate-700 transition">
+                        <div class="w-10 h-10 mx-auto rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-2 text-lg">
+                            <i class="fa-solid fa-cloud"></i>
+                        </div>
+                        <h2 class="text-xs sm:text-sm font-bold text-white">SaaS & Web Tools</h2>
+                        <p class="text-[11px] text-slate-400 mt-0.5">AI Pro Portals</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl border border-slate-800/80 text-center hover:border-slate-700 transition">
+                        <div class="w-10 h-10 mx-auto rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-2 text-lg">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                        <h2 class="text-xs sm:text-sm font-bold text-white">Loans & Credit</h2>
+                        <p class="text-[11px] text-slate-400 mt-0.5">Fast Approvals</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HORIZONTAL CATEGORY NAVIGATION BAR -->
+        <section class="mb-8">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Browse Categories</h3>
+                <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold" id="categoryCountText">All Categories</span>
+            </div>
+            <div id="categoryContainer" class="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-1">
+                <!-- Dynamically populated categories -->
+            </div>
+        </section>
+
+        <!-- FEATURED APPS / CARDS CAROUSEL -->
+        <section id="featuredSection" class="mb-10">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-star text-amber-400"></i> Top Trending Offers
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Handpicked SaaS tools, digital cards, and verified APK downloads</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="scrollSection('featuredCarousel', -320)" class="w-8 h-8 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm text-xs">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button onclick="scrollSection('featuredCarousel', 320)" class="w-8 h-8 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm text-xs">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="featuredCarousel" class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth pb-2">
+                <!-- Dynamically Rendered Featured Cards -->
+            </div>
+        </section>
+
+        <!-- SMART TABS & FILTER TOOLBAR -->
+        <section id="shopGridAnchor" class="mb-6 pt-2">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                
+                <!-- Filter Tabs with Colorful Vibrant Themes -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                    <button onclick="setActiveTab('all')" id="tab-all" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap shadow-md bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-blue-500/20">
+                        <i class="fa-solid fa-border-all mr-1"></i> All Digital Items
+                    </button>
+                    
+                    <button onclick="setActiveTab('trending')" id="tab-trending" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800">
+                        🔥 Trending
+                    </button>
+                    
+                    <button onclick="setActiveTab('deal')" id="tab-deal" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800">
+                        ⚡ Top Offers
+                    </button>
+                    
+                    <button onclick="setActiveTab('bestseller')" id="tab-bestseller" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800">
+                        ⭐ Top Rated
+                    </button>
+                    
+                    <button onclick="setActiveTab('newProduct')" id="tab-newProduct" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800">
+                        ✨ New Arrivals
+                    </button>
+                    
+                    <button onclick="setActiveTab('wishlist')" id="tab-wishlist" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800">
+                        📌 Saved
+                    </button>
+                </div>
+
+                <!-- Sort Control -->
+                <div class="flex items-center justify-between md:justify-end gap-3">
+                    <div class="flex items-center space-x-2">
+                        <label for="sortDropdown" class="text-xs text-slate-500 dark:text-slate-400 font-semibold whitespace-nowrap">Sort:</label>
+                        <select id="sortDropdown" onchange="handleSortChange(this.value)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs rounded-xl px-3 py-1.5 font-bold focus:outline-none focus:border-blue-500 dark:text-white shadow-sm">
+                            <option value="recommended">Recommended</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIVE FILTER CHIPS -->
+            <div id="activeFilterChips" class="flex flex-wrap items-center gap-2 mt-3 empty:hidden">
+                <!-- Dynamically populated tags -->
+            </div>
+        </section>
+
+        <!-- PRODUCT GRID & STATUS BAR -->
+        <section class="mb-12">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold" id="productCountLabel">Showing products...</span>
+                <button onclick="resetAllState()" class="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline hidden" id="resetFiltersBtn">Reset All Filters</button>
+            </div>
+
+            <!-- Main Dynamic Grid with Adaptive Aspect Ratios -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Skeleton Loading State -->
+                <template id="skeletonTemplate">
+                    <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800/80 rounded-2xl p-4 flex flex-col space-y-3">
+                        <div class="w-full h-36 skeleton rounded-xl"></div>
+                        <div class="h-4 w-3/4 skeleton rounded"></div>
+                        <div class="h-3 w-1/2 skeleton rounded"></div>
+                        <div class="flex justify-between items-center pt-2">
+                            <div class="h-5 w-16 skeleton rounded"></div>
+                            <div class="h-7 w-7 skeleton rounded-lg"></div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- EMPTY STATE UI -->
+            <div id="emptyState" class="hidden text-center py-14 px-4 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 my-4">
+                <div class="w-14 h-14 bg-blue-50 dark:bg-slate-800 text-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl">
+                    <i class="fa-solid fa-ban"></i>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">No digital services found</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6">No items match your selected filters. Try broadening your search or resetting filters.</p>
+                <div class="flex justify-center gap-2">
+                    <button onclick="resetAllState()" class="px-5 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl hover:bg-blue-700 transition shadow">
+                        Clear All Filters
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECENTLY VIEWED SECTION -->
+        <section id="recentlyViewedSection" class="mb-10 hidden">
+            <div class="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-slate-800 pb-2">
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left text-blue-500"></i> Recently Viewed Items
+                </h3>
+                <button onclick="clearRecentlyViewed()" class="text-[11px] font-semibold text-slate-400 hover:text-red-500">Clear</button>
+            </div>
+            <div id="recentlyViewedContainer" class="flex gap-3 overflow-x-auto no-scrollbar py-1">
+                <!-- Dynamically injected -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-xs py-10 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center text-white font-black text-sm">
+                            <i class="fa-solid fa-cubes"></i>
+                        </div>
+                        <span class="text-lg font-black text-slate-900 dark:text-white">NEXUS</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 mb-3 text-xs leading-relaxed">
+                        A clean discovery portal for verified APKs, pro Android tools, SaaS web platforms, virtual cards, and instant credit/loan apps.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-3">Apps & SaaS</h4>
+                    <ul class="space-y-2 text-slate-500 dark:text-slate-400">
+                        <li><a href="#" onclick="filterByCategory('APK & Games')" class="hover:text-blue-500">APK Games MOD</a></li>
+                        <li><a href="#" onclick="filterByCategory('APK Tools')" class="hover:text-blue-500">Pro Android Tools</a></li>
+                        <li><a href="#" onclick="filterByCategory('SaaS Tools')" class="hover:text-blue-500">AI & Web SaaS</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-3">Fintech & Credit</h4>
+                    <ul class="space-y-2 text-slate-500 dark:text-slate-400">
+                        <li><a href="#" onclick="filterByCategory('Banking & Accounts')" class="hover:text-blue-500">Digital Banking</a></li>
+                        <li><a href="#" onclick="filterByCategory('Cards & Credit')" class="hover:text-blue-500">Virtual Cards</a></li>
+                        <li><a href="#" onclick="filterByCategory('Loans & Finance')" class="hover:text-blue-500">Instant Loan Apps</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-3">Security</h4>
+                    <ul class="space-y-2 text-slate-500 dark:text-slate-400">
+                        <li><i class="fa-solid fa-shield text-emerald-500 mr-1.5"></i> Safe APK Scans</li>
+                        <li><i class="fa-solid fa-lock text-blue-500 mr-1.5"></i> Secure Redirects</li>
+                        <li><i class="fa-solid fa-bolt text-amber-500 mr-1.5"></i> Instant Links</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-100 dark:border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-slate-400 text-[11px]">
+                <p>&copy; 2026 NEXUS Digital Hub. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Single-File Portal ready for GitHub Pages hosting.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-4 py-2.5">
+        <div class="flex items-center justify-around">
+            <button onclick="setActiveTab('all')" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400 hover:text-blue-600">
+                <i class="fa-solid fa-house text-sm"></i>
+                <span class="text-[9px] font-semibold">Home</span>
+            </button>
+            <button onclick="toggleFilterDrawer()" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400 hover:text-blue-600">
+                <i class="fa-solid fa-sliders text-sm"></i>
+                <span class="text-[9px] font-semibold">Filter</span>
+            </button>
+            <button onclick="openAISearchModal()" class="flex flex-col items-center gap-0.5 text-emerald-500 font-bold">
+                <div class="w-8 h-8 rounded-full bg-slate-900 dark:bg-slate-800 text-emerald-400 flex items-center justify-center -mt-4 shadow border border-emerald-500/40">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                </div>
+                <span class="text-[9px] font-bold text-emerald-500">AI Search</span>
+            </button>
+            <button onclick="setActiveTab('deal')" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400 hover:text-blue-600">
+                <i class="fa-solid fa-bolt text-sm"></i>
+                <span class="text-[9px] font-semibold">Offers</span>
+            </button>
+            <button onclick="setActiveTab('wishlist')" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400 hover:text-blue-600 relative">
+                <i class="fa-solid fa-bookmark text-sm"></i>
+                <span class="text-[9px] font-semibold">Saved</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- AI SEARCH MODAL -->
+    <div id="aiSearchModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Smart Digital AI Search</h3>
+                </div>
+                <button onclick="closeAISearchModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                Ask naturally for APKs, virtual cards, SaaS tools, or low interest loans.
+            </p>
+
+            <div class="relative mb-4">
+                <textarea id="aiQueryInput" rows="3" placeholder="e.g. 'Show me free APK games with high ratings' or 'Best virtual card with no annual fee'" 
+                          class="w-full p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs focus:outline-none focus:border-blue-500 dark:text-white resize-none"></textarea>
+            </div>
+
+            <div class="mb-5">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Try sample queries:</span>
+                <div class="flex flex-wrap gap-1.5">
+                    <button onclick="setAIPrompt('Free gaming APKs with pro unlocked')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 rounded-lg text-[10px] font-semibold">🎮 Free Pro APK Games</button>
+                    <button onclick="setAIPrompt('Virtual credit cards instant setup')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 rounded-lg text-[10px] font-semibold">💳 Instant Virtual Cards</button>
+                    <button onclick="setAIPrompt('Low interest personal loan apps')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 rounded-lg text-[10px] font-semibold">💰 Low Interest Loans</button>
+                    <button onclick="setAIPrompt('AI SaaS tools for creators')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 rounded-lg text-[10px] font-semibold">🤖 AI SaaS Web Tools</button>
+                </div>
+            </div>
+
+            <button onclick="executeAISearch()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-sparkles text-emerald-400"></i> Process Search
+            </button>
+        </div>
+    </div>
+
+    <!-- FILTER DRAWER -->
+    <div id="filterDrawer" class="fixed inset-0 z-50 hidden">
+        <div onclick="toggleFilterDrawer()" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-xs bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between overflow-y-auto">
+            <div>
+                <div class="flex items-center justify-between mb-6 pb-3 border-b border-slate-100 dark:border-slate-800">
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-blue-500"></i> Filter Services
+                    </h3>
+                    <button onclick="toggleFilterDrawer()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Category -->
+                <div class="mb-6">
+                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Category</label>
+                    <div id="drawerCategoryList" class="space-y-1.5 max-h-44 overflow-y-auto pr-1"></div>
+                </div>
+
+                <!-- Price Slider -->
+                <div class="mb-6">
+                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Price Limit (<span id="priceValueLabel">Free / Max</span>)</label>
+                    <input type="range" id="priceRangeInput" min="0" max="5000" step="250" value="5000" oninput="updatePriceLabel(this.value)" class="w-full accent-blue-600">
+                    <div class="flex justify-between text-[10px] text-slate-400 mt-1 font-semibold">
+                        <span>Free (₹0)</span>
+                        <span>₹2,500</span>
+                        <span>₹5,000+</span>
+                    </div>
+                </div>
+
+                <!-- Rating -->
+                <div class="mb-6">
+                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Minimum Rating</label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <button onclick="setRatingFilter(0)" id="rate-0" class="rating-btn py-1.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bold text-center dark:text-white bg-blue-50 dark:bg-slate-800 border-blue-500">All</button>
+                        <button onclick="setRatingFilter(3)" id="rate-3" class="rating-btn py-1.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bold text-center dark:text-white">3★+</button>
+                        <button onclick="setRatingFilter(4)" id="rate-4" class="rating-btn py-1.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bold text-center dark:text-white">4★+</button>
+                        <button onclick="setRatingFilter(4.5)" id="rate-4.5" class="rating-btn py-1.5 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bold text-center dark:text-white">4.5★+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex gap-2">
+                <button onclick="resetAllState(); toggleFilterDrawer();" class="w-1/2 py-2.5 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800">
+                    Reset
+                </button>
+                <button onclick="applyDrawerFilters(); toggleFilterDrawer();" class="w-1/2 py-2.5 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 shadow">
+                    Apply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENHANCED QUICK VIEW POPUP MODAL (WITH SLIDER + ARTICLE + SHARE BUTTONS) -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl relative max-h-[92vh] overflow-y-auto no-scrollbar">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white flex items-center justify-center z-20 transition shadow">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <div id="quickViewContent">
+                <!-- Dynamically populated inside JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-16 md:bottom-6 right-4 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <script>
+        /* -------------------------------------------------------------------------- */
+        /* 1. STORE CONFIGURATION & DIGITAL SERVICES DATABASE                          */
+        /* -------------------------------------------------------------------------- */
+        window.STORE_CONFIG = {
+            storeName: "NEXUS Digital Hub",
+            currency: "₹",
+            enableDarkMode: true,
+            enableAISearch: true,
+            enableWishlist: true,
+            enableRecentlyViewed: true
+        };
+
+        // database with multiple aspect ratios (1:1, 16:9, 12:9) & image gallery arrays
+        window.PRODUCT_DATABASE = [
+            {
+                id: "item-201",
+                name: "Spotify Premium MOD APK (v8.9 Unlocked)",
+                image: "https://images.unsplash.com/photo-1611339555312-e607c8352fd7?auto=format&fit=crop&w=600&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1611339555312-e607c8352fd7?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80"
+                ],
+                aspectRatio: "1:1", // 1:1 Square icon app
+                price: 0,
+                oldPrice: 119,
+                discount: 100,
+                rating: 4.8,
+                reviews: 1420,
+                category: "APK & Games",
+                brand: "Music APK",
+                tags: ["spotify", "apk", "mod", "music", "free", "android"],
+                description: "Unlocked music streaming APK with ad-free listening, unlimited skips, offline download feature enabled, and extreme audio quality unlocked.",
+                highlights: [
+                    "Ad-Free Music & Podcast Streaming",
+                    "Unlimited Skips & Scrubbing Enabled",
+                    "High Fidelity Extreme Audio Quality",
+                    "No Root Required, Safe Installation"
+                ],
+                featured: true,
+                trending: true,
+                bestseller: true,
+                newProduct: false,
+                deal: true,
+                inStock: true,
+                badge: "1:1 FREE APK",
+                actionText: "Download APK",
+                url: "https://github.com"
+            },
+            {
+                id: "item-202",
+                name: "Jupiter Digital Neobank & Zero Forex Card",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=800&q=80"
+                ],
+                aspectRatio: "12:9", // 12:9 banking banner
+                price: 0,
+                oldPrice: 499,
+                discount: 100,
+                rating: 4.7,
+                reviews: 890,
+                category: "Banking & Accounts",
+                brand: "Jupiter",
+                tags: ["bank", "neobank", "digital account", "upi", "zero balance"],
+                description: "Open a 100% digital zero balance savings account in under 3 minutes with real-time spend analytics, rewards, and free VISA contactless card.",
+                highlights: [
+                    "Zero Balance Account with No Hidden Charges",
+                    "Free Contactless VISA Debit Card",
+                    "Real-time Spending Insights & Pots Savings",
+                    "Instant UPI & NEFT Transfers"
+                ],
+                featured: true,
+                trending: true,
+                bestseller: false,
+                newProduct: true,
+                deal: true,
+                inStock: true,
+                badge: "12:9 ZERO BAL",
+                actionText: "Open Account",
+                url: "https://jupiter.money"
+            },
+            {
+                id: "item-203",
+                name: "SlicesX Virtual Prepaid Card Platform",
+                image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80"
+                ],
+                aspectRatio: "12:9",
+                price: 199,
+                oldPrice: 499,
+                discount: 60,
+                rating: 4.6,
+                reviews: 640,
+                category: "Cards & Credit",
+                brand: "SlicePay",
+                tags: ["card", "virtual card", "credit", "cashback", "prepaid"],
+                description: "Instant virtual VISA card issuing for safe online shopping, international trials, recurring subscriptions, and cashback perks.",
+                highlights: [
+                    "Instant Card Creation in 60 Seconds",
+                    "Freeze & Unfreeze Card in One Click",
+                    "1% Cashbacks on All Spends",
+                    "International Payment Support"
+                ],
+                featured: true,
+                trending: false,
+                bestseller: true,
+                newProduct: false,
+                deal: true,
+                inStock: true,
+                badge: "12:9 CARD",
+                actionText: "Claim Card",
+                url: "https://example.com"
+            },
+            {
+                id: "item-204",
+                name: "KreditBee Instant Personal Loan App",
+                image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80"
+                ],
+                aspectRatio: "16:9", // 16:9 loan banner
+                price: 0,
+                oldPrice: 0,
+                discount: 0,
+                rating: 4.5,
+                reviews: 2100,
+                category: "Loans & Finance",
+                brand: "KreditBee",
+                tags: ["loan", "credit", "finance", "instant loan", "borrow", "cash"],
+                description: "Get instant personal loans from ₹1,000 to ₹4,000,000 directly into your bank account with minimal documentation and low interest rates.",
+                highlights: [
+                    "Paperless Approval in 10 Minutes",
+                    "Direct Bank Transfer",
+                    "Flexible Tenure Options (3-24 months)",
+                    "100% Secure & RBI Registered NBFC"
+                ],
+                featured: false,
+                trending: true,
+                bestseller: true,
+                newProduct: false,
+                deal: false,
+                inStock: true,
+                badge: "16:9 FAST LOAN",
+                actionText: "Apply Loan",
+                url: "https://kreditbee.in"
+            },
+            {
+                id: "item-205",
+                name: "ChatGPT Plus & Claude Pro Web Portal Access",
+                image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"
+                ],
+                aspectRatio: "12:9",
+                price: 499,
+                oldPrice: 1999,
+                discount: 75,
+                rating: 4.9,
+                reviews: 1850,
+                category: "SaaS Tools",
+                brand: "OpenAI & Anthropic",
+                tags: ["ai", "saas", "chatgpt", "claude", "gpt4", "tools"],
+                description: "Shared workspace access to GPT-4o, DALL-E 3, and Claude 3.5 Sonnet without monthly individual $20 recurring fees.",
+                highlights: [
+                    "GPT-4o & Claude 3.5 Sonnet Unlocked",
+                    "DALL-E 3 Image Generation",
+                    "Code Interpreter & Web Browsing",
+                    "High Performance Workspace"
+                ],
+                featured: true,
+                trending: true,
+                bestseller: true,
+                newProduct: true,
+                deal: true,
+                inStock: true,
+                badge: "12:9 AI SAAS",
+                actionText: "Get Access",
+                url: "https://openai.com"
+            },
+            {
+                id: "item-206",
+                name: "GTA San Andreas HD Remaster MOD APK",
+                image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80"
+                ],
+                aspectRatio: "16:9", // 16:9 Widescreen game
+                price: 0,
+                oldPrice: 499,
+                discount: 100,
+                rating: 4.9,
+                reviews: 3400,
+                category: "APK & Games",
+                brand: "Rockstar MOD",
+                tags: ["gta", "game", "apk", "mod", "android", "action"],
+                description: "Full offline Android game APK + OBB with HD textures, cheat menu integration, unlimited money, and remastered graphics.",
+                highlights: [
+                    "Full HD Remastered Textures & Lighting",
+                    "Built-in CLEO Cheat Menu",
+                    "Unlimited Money & Unlocked Missions",
+                    "Full Offline Gameplay Supported"
+                ],
+                featured: false,
+                trending: true,
+                bestseller: false,
+                newProduct: true,
+                deal: true,
+                inStock: true,
+                badge: "16:9 GAME",
+                actionText: "Download Game",
+                url: "https://github.com"
+            },
+            {
+                id: "item-207",
+                name: "Canva Pro Team Lifetime Subscription",
+                image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80"
+                ],
+                aspectRatio: "12:9",
+                price: 299,
+                oldPrice: 3999,
+                discount: 92,
+                rating: 4.8,
+                reviews: 980,
+                category: "SaaS Tools",
+                brand: "Canva",
+                tags: ["canva", "design", "saas", "pro", "graphics", "editor"],
+                description: "Get added to Canva Pro Enterprise Team link with access to 100M+ premium assets, brand kits, AI image generator, and background remover.",
+                highlights: [
+                    "100M+ Premium Stock Photos & Graphics",
+                    "One-Click Background Remover",
+                    "Magic Studio AI Tools Unlocked",
+                    "Lifetime Team Access Warranty"
+                ],
+                featured: false,
+                trending: true,
+                bestseller: true,
+                newProduct: false,
+                deal: true,
+                inStock: true,
+                badge: "12:9 DESIGN",
+                actionText: "Join Team",
+                url: "https://canva.com"
+            },
+            {
+                id: "item-208",
+                name: "CapCut Pro Android App (v11.2 Unlocked)",
+                image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80"
+                ],
+                aspectRatio: "1:1", // 1:1 App icon
+                price: 0,
+                oldPrice: 799,
+                discount: 100,
+                rating: 4.7,
+                reviews: 1120,
+                category: "APK Tools",
+                brand: "CapCut MOD",
+                tags: ["capcut", "video editor", "apk", "pro", "android", "tools"],
+                description: "Pro unlocked Android APK with pro transitions, AI background remover, 4K 60FPS export, and no watermarks.",
+                highlights: [
+                    "All Pro Effects & Transitions Unlocked",
+                    "No Watermark on Exports",
+                    "4K 60FPS High Resolution Rendering",
+                    "Auto Captions & AI Effects"
+                ],
+                featured: true,
+                trending: false,
+                bestseller: false,
+                newProduct: true,
+                deal: false,
+                inStock: true,
+                badge: "1:1 APP TOOL",
+                actionText: "Download APK",
+                url: "https://github.com"
+            }
+        ];
+
+        /* -------------------------------------------------------------------------- */
+        /* 2. STATE MANAGEMENT                                                       */
+        /* -------------------------------------------------------------------------- */
+        let state = {
+            searchQuery: "",
+            activeCategory: "All",
+            activeTab: "all",
+            sortBy: "recommended",
+            maxPrice: 5000,
+            minRating: 0,
+            wishlist: JSON.parse(localStorage.getItem("nexus_saved_items") || "[]"),
+            recentlyViewed: JSON.parse(localStorage.getItem("nexus_recent_items") || "[]"),
+            aiFilters: null
+        };
+
+        // Modal Slider state
+        let currentModalImages = [];
+        let currentSlideIndex = 0;
+
+        /* -------------------------------------------------------------------------- */
+        /* 3. INITIALIZATION                                                          */
+        /* -------------------------------------------------------------------------- */
+        document.addEventListener("DOMContentLoaded", () => {
+            initTheme();
+            renderCategoryNavigation();
+            renderDrawerCategories();
+            renderFeaturedCarousel();
+            applyFilterAndRender();
+            updateWishlistBadge();
+            renderRecentlyViewed();
+        });
+
+        function initTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                showToast("Light mode activated");
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                showToast("Dark mode activated");
+            }
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 4. CATEGORIES & NAVIGATION                                                 */
+        /* -------------------------------------------------------------------------- */
+        function getCategories() {
+            return ["All", ...new Set(window.PRODUCT_DATABASE.map(p => p.category))];
+        }
+
+        function renderCategoryNavigation() {
+            const container = document.getElementById("categoryContainer");
+            const categories = getCategories();
+            
+            container.innerHTML = categories.map(cat => {
+                const isActive = state.activeCategory === cat;
+                return `
+                    <button onclick="filterByCategory('${cat}')" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-2 shadow-sm
+                                   ${isActive 
+                                      ? 'bg-blue-600 text-white shadow-blue-500/20' 
+                                      : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-blue-500'}">
+                        ${getCategoryIcon(cat)} ${cat}
+                    </button>
+                `;
+            }).join("");
+        }
+
+        function getCategoryIcon(cat) {
+            switch(cat) {
+                case "APK & Games": return `<i class="fa-solid fa-gamepad text-purple-400"></i>`;
+                case "APK Tools": return `<i class="fa-solid fa-android text-emerald-400"></i>`;
+                case "Banking & Accounts": return `<i class="fa-solid fa-building-columns text-blue-400"></i>`;
+                case "Cards & Credit": return `<i class="fa-solid fa-credit-card text-pink-400"></i>`;
+                case "Loans & Finance": return `<i class="fa-solid fa-hand-holding-dollar text-amber-400"></i>`;
+                case "SaaS Tools": return `<i class="fa-solid fa-cloud text-indigo-400"></i>`;
+                default: return `<i class="fa-solid fa-border-all text-slate-400"></i>`;
+            }
+        }
+
+        function renderDrawerCategories() {
+            const container = document.getElementById("drawerCategoryList");
+            const categories = getCategories();
+            
+            container.innerHTML = categories.map(cat => `
+                <label class="flex items-center space-x-2 text-xs text-slate-700 dark:text-slate-300 cursor-pointer py-1 font-semibold">
+                    <input type="radio" name="drawerCat" value="${cat}" ${state.activeCategory === cat ? 'checked' : ''} onchange="filterByCategory('${cat}')" class="text-blue-600 focus:ring-0">
+                    <span>${cat}</span>
+                </label>
+            `).join("");
+        }
+
+        function filterByCategory(cat) {
+            state.activeCategory = cat;
+            renderCategoryNavigation();
+            renderDrawerCategories();
+            document.getElementById("categoryCountText").innerText = cat === "All" ? "All Categories" : `${cat}`;
+            applyFilterAndRender();
+        }
+
+        // Vibrant 4+ Tab Color Styling Function
+        function setActiveTab(tab) {
+            state.activeTab = tab;
+            const tabs = ['all', 'trending', 'deal', 'bestseller', 'newProduct', 'wishlist'];
+            
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (!btn) return;
+                
+                // Base style for inactive tabs
+                const inactiveClass = "px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm";
+                
+                if (t === tab) {
+                    // Vibrant Active Gradients
+                    switch(t) {
+                        case 'all':
+                            btn.className = "px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap text-white shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 shadow-blue-500/20";
+                            break;
+                        case 'trending':
+                            btn.className = "px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap text-white shadow-lg bg-gradient-to-r from-orange-500 to-red-600 shadow-orange-500/20";
+                            break;
+                        case 'deal':
+                            btn.className = "px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap text-slate-950 shadow-lg bg-gradient-to-r from-amber-400 to-yellow-500 shadow-amber-500/20";
+                            break;
+                        case 'bestseller':
+                            btn.className = "px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap text-white shadow-lg bg-gradient-to-r from-emerald-500 to-teal-600 shadow-emerald-500/20";
+                            break;
+                        case 'newProduct':
+                            btn.className = "px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap text-white shadow-lg bg-gradient-to-r from-violet-600 to-purple-600 shadow-purple-500/20";
+                            break;
+                        case 'wishlist':
+                            btn.className = "px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition whitespace-nowrap text-white shadow-lg bg-gradient-to-r from-pink-600 to-rose-600 shadow-pink-500/20";
+                            break;
+                    }
+                } else {
+                    btn.className = inactiveClass;
+                }
+            });
+
+            applyFilterAndRender();
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 5. SEARCH & FILTER CORE ENGINE                                            */
+        /* -------------------------------------------------------------------------- */
+        function handleSearchInput(val) {
+            state.searchQuery = val.trim().toLowerCase();
+            document.getElementById("searchInputDesktop").value = val;
+            document.getElementById("searchInputMobile").value = val;
+            applyFilterAndRender();
+        }
+
+        function clearSearch() {
+            handleSearchInput("");
+        }
+
+        function applyFilterAndRender() {
+            let products = [...window.PRODUCT_DATABASE];
+
+            if (state.searchQuery) {
+                products = products.filter(p => 
+                    p.name.toLowerCase().includes(state.searchQuery) ||
+                    p.brand.toLowerCase().includes(state.searchQuery) ||
+                    p.category.toLowerCase().includes(state.searchQuery) ||
+                    p.description.toLowerCase().includes(state.searchQuery) ||
+                    p.tags.some(t => t.toLowerCase().includes(state.searchQuery))
+                );
+            }
+
+            if (state.activeCategory !== "All") {
+                products = products.filter(p => p.category === state.activeCategory);
+            }
+
+            if (state.activeTab === "wishlist") {
+                products = products.filter(p => state.wishlist.includes(p.id));
+            } else if (state.activeTab !== "all") {
+                products = products.filter(p => p[state.activeTab] === true);
+            }
+
+            if (state.maxPrice < 5000) {
+                products = products.filter(p => p.price <= state.maxPrice);
+            }
+            if (state.minRating > 0) {
+                products = products.filter(p => p.rating >= state.minRating);
+            }
+
+            if (state.aiFilters) {
+                const ai = state.aiFilters;
+                if (ai.category) products = products.filter(p => p.category.toLowerCase() === ai.category.toLowerCase());
+                if (ai.maxPrice !== null) products = products.filter(p => p.price <= ai.maxPrice);
+                if (ai.minRating) products = products.filter(p => p.rating >= ai.minRating);
+                if (ai.keyword) {
+                    products = products.filter(p => 
+                        p.name.toLowerCase().includes(ai.keyword) || 
+                        p.tags.some(t => t.toLowerCase().includes(ai.keyword))
+                    );
+                }
+            }
+
+            products = sortProductList(products, state.sortBy);
+
+            renderMainGrid(products);
+            renderFilterChips();
+            updateProductCountLabel(products.length);
+        }
+
+        function sortProductList(list, sortBy) {
+            switch(sortBy) {
+                case "price-asc": return list.sort((a,b) => a.price - b.price);
+                case "price-desc": return list.sort((a,b) => b.price - a.price);
+                case "rating": return list.sort((a,b) => b.rating - a.rating);
+                case "popular": return list.sort((a,b) => b.reviews - a.reviews);
+                default: return list;
+            }
+        }
+
+        function handleSortChange(val) {
+            state.sortBy = val;
+            applyFilterAndRender();
+        }
+
+        function updateProductCountLabel(count) {
+            const lbl = document.getElementById("productCountLabel");
+            const resetBtn = document.getElementById("resetFiltersBtn");
+            
+            lbl.innerText = `Showing ${count} item${count === 1 ? '' : 's'}`;
+            
+            const isFiltered = state.searchQuery || state.activeCategory !== "All" || state.activeTab !== "all" || state.maxPrice < 5000 || state.minRating > 0 || state.aiFilters;
+            if (isFiltered) {
+                resetBtn.classList.remove("hidden");
+            } else {
+                resetBtn.classList.add("hidden");
+            }
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 6. PRODUCT GRID RENDERER WITH ASPECT RATIO CONTROLS                       */
+        /* -------------------------------------------------------------------------- */
+        function renderMainGrid(products) {
+            const grid = document.getElementById("productGrid");
+            const emptyState = document.getElementById("emptyState");
+
+            if (products.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+            grid.innerHTML = products.map(product => createProductCardHTML(product)).join("");
+        }
+
+        function createProductCardHTML(p) {
+            const isSaved = state.wishlist.includes(p.id);
+            const priceDisplay = p.price === 0 ? '<span class="text-emerald-500 font-extrabold">FREE</span>' : `${STORE_CONFIG.currency}${p.price.toLocaleString('en-IN')}`;
+
+            // Helper to determine aspect ratio class (1:1, 16:9, or 12:9)
+            let aspectClass = "aspect-[12/9]";
+            if (p.aspectRatio === "1:1") aspectClass = "aspect-square";
+            if (p.aspectRatio === "16:9") aspectClass = "aspect-video";
+            if (p.aspectRatio === "12:9") aspectClass = "aspect-[12/9]";
+
+            return `
+                <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-3 flex flex-col justify-between hover:shadow-xl hover:border-slate-300 dark:hover:border-slate-700 transition duration-200 group relative">
+                    
+                    <!-- Image Box with Aspect Ratio Styling -->
+                    <div class="relative w-full ${aspectClass} rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 mb-3">
+                        <img src="${p.image}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        
+                        <div class="absolute top-2 left-2 flex flex-col gap-1">
+                            ${p.badge ? `<span class="bg-slate-900/90 border border-slate-700 text-emerald-400 font-extrabold text-[9px] uppercase px-2 py-0.5 rounded-md shadow">${p.badge}</span>` : ''}
+                        </div>
+
+                        <button onclick="toggleWishlist('${p.id}', event)" 
+                                class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-900/80 backdrop-blur-md flex items-center justify-center text-slate-300 hover:text-pink-500 transition shadow">
+                            <i class="${isSaved ? 'fa-solid text-pink-500' : 'fa-regular'} fa-bookmark text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Meta Details -->
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1 font-bold">
+                                <span class="uppercase text-blue-500">${p.brand}</span>
+                                <span class="flex items-center gap-1 text-amber-400">
+                                    <i class="fa-solid fa-star"></i> ${p.rating}
+                                </span>
+                            </div>
+
+                            <h3 onclick="openQuickView('${p.id}')" class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 mb-3 cursor-pointer hover:text-blue-500 transition leading-snug">
+                                ${p.name}
+                            </h3>
+                        </div>
+
+                        <!-- Price & CTA Button -->
+                        <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs sm:text-sm font-black text-slate-900 dark:text-white">
+                                    ${priceDisplay}
+                                </div>
+                            </div>
+
+                            <button onclick="openQuickView('${p.id}')"
+                                    class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] uppercase tracking-wide flex items-center gap-1.5 transition shadow-sm">
+                                <span>${p.actionText || 'View'}</span>
+                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 7. FEATURED CAROUSEL RENDERER                                              */
+        /* -------------------------------------------------------------------------- */
+        function renderFeaturedCarousel() {
+            const carousel = document.getElementById("featuredCarousel");
+            const featuredList = window.PRODUCT_DATABASE.filter(p => p.featured);
+            
+            carousel.innerHTML = featuredList.map(p => `
+                <div class="min-w-[240px] sm:min-w-[280px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3 flex-shrink-0 shadow-sm relative group hover:shadow-md transition">
+                    <div class="relative h-32 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 mb-2.5">
+                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition">
+                        <span class="absolute top-2 left-2 bg-blue-600 text-white font-extrabold text-[9px] px-2 py-0.5 rounded-md">FEATURED</span>
+                    </div>
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">${p.category}</span>
+                    <h4 onclick="openQuickView('${p.id}')" class="font-bold text-xs text-slate-900 dark:text-white line-clamp-1 mb-2 cursor-pointer hover:underline">${p.name}</h4>
+                    <div class="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-slate-800">
+                        <span class="font-black text-xs text-emerald-500">${p.price === 0 ? 'FREE' : STORE_CONFIG.currency + p.price}</span>
+                        <button onclick="openQuickView('${p.id}')" class="text-[11px] font-bold text-blue-500 hover:underline flex items-center gap-1">
+                            Details &rarr;
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function scrollSection(elementId, distance) {
+            document.getElementById(elementId).scrollBy({ left: distance, behavior: 'smooth' });
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 8. AI SEARCH PARSER                                                        */
+        /* -------------------------------------------------------------------------- */
+        function openAISearchModal() {
+            document.getElementById("aiSearchModal").classList.remove("hidden");
+        }
+
+        function closeAISearchModal() {
+            document.getElementById("aiSearchModal").classList.add("hidden");
+        }
+
+        function setAIPrompt(text) {
+            document.getElementById("aiQueryInput").value = text;
+        }
+
+        function executeAISearch() {
+            const query = document.getElementById("aiQueryInput").value.trim().toLowerCase();
+            if (!query) return;
+
+            const parsedFilters = { category: null, maxPrice: null, minRating: null, keyword: null };
+
+            if (query.includes("apk") || query.includes("game") || query.includes("android")) parsedFilters.category = "APK & Games";
+            if (query.includes("card") || query.includes("virtual")) parsedFilters.category = "Cards & Credit";
+            if (query.includes("bank") || query.includes("account")) parsedFilters.category = "Banking & Accounts";
+            if (query.includes("loan") || query.includes("credit") || query.includes("borrow")) parsedFilters.category = "Loans & Finance";
+            if (query.includes("saas") || query.includes("tool") || query.includes("ai")) parsedFilters.category = "SaaS Tools";
+
+            if (query.includes("free")) parsedFilters.maxPrice = 0;
+            if (query.includes("high rated") || query.includes("top rated")) parsedFilters.minRating = 4.5;
+
+            state.aiFilters = parsedFilters;
+            closeAISearchModal();
+            applyFilterAndRender();
+            showToast("AI query applied successfully!");
+            scrollToGrid();
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 9. DRAWER & MODAL CONTROLLERS                                              */
+        /* -------------------------------------------------------------------------- */
+        function toggleFilterDrawer() {
+            document.getElementById("filterDrawer").classList.toggle("hidden");
+        }
+
+        function toggleMobileSearch() {
+            document.getElementById("mobileSearchBar").classList.toggle("hidden");
+        }
+
+        function updatePriceLabel(val) {
+            state.maxPrice = parseInt(val);
+            document.getElementById("priceValueLabel").innerText = val === 0 ? 'Free Only' : val >= 5000 ? 'Max' : `₹${val}`;
+        }
+
+        function setRatingFilter(val) {
+            state.minRating = val;
+            document.querySelectorAll(".rating-btn").forEach(b => b.classList.remove("bg-blue-50", "dark:bg-slate-800", "border-blue-500"));
+            document.getElementById(`rate-${val}`).classList.add("bg-blue-50", "dark:bg-slate-800", "border-blue-500");
+        }
+
+        function applyDrawerFilters() {
+            applyFilterAndRender();
+            showToast("Filters applied");
+        }
+
+        function renderFilterChips() {
+            const container = document.getElementById("activeFilterChips");
+            let chips = [];
+
+            if (state.searchQuery) chips.push({ label: `Search: "${state.searchQuery}"`, action: "clearSearch()" });
+            if (state.activeCategory !== "All") chips.push({ label: `Category: ${state.activeCategory}`, action: "filterByCategory('All')" });
+            if (state.maxPrice < 5000) chips.push({ label: `Max Cost: ₹${state.maxPrice}`, action: "resetPrice()" });
+            if (state.aiFilters) chips.push({ label: "✨ AI Filter Active", action: "clearAIFilter()" });
+
+            container.innerHTML = chips.map(c => `
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 dark:bg-slate-800 border border-blue-200 dark:border-slate-700 text-blue-600 dark:text-blue-400 rounded-full text-xs font-semibold">
+                    ${c.label}
+                    <button onclick="${c.action}" class="hover:text-red-500"><i class="fa-solid fa-xmark"></i></button>
+                </span>
+            `).join("");
+        }
+
+        function resetPrice() {
+            state.maxPrice = 5000;
+            document.getElementById("priceRangeInput").value = 5000;
+            updatePriceLabel(5000);
+            applyFilterAndRender();
+        }
+
+        function clearAIFilter() {
+            state.aiFilters = null;
+            applyFilterAndRender();
+        }
+
+        function resetAllState() {
+            state.searchQuery = "";
+            state.activeCategory = "All";
+            state.activeTab = "all";
+            state.maxPrice = 5000;
+            state.minRating = 0;
+            state.aiFilters = null;
+
+            document.getElementById("searchInputDesktop").value = "";
+            document.getElementById("searchInputMobile").value = "";
+            document.getElementById("priceRangeInput").value = 5000;
+            updatePriceLabel(5000);
+
+            renderCategoryNavigation();
+            renderDrawerCategories();
+            setActiveTab('all');
+            showToast("All filters cleared");
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 10. BOOKMARKS & RECENT ITEMS                                               */
+        /* -------------------------------------------------------------------------- */
+        function toggleWishlist(productId, e) {
+            if (e) e.stopPropagation();
+
+            const idx = state.wishlist.indexOf(productId);
+            if (idx > -1) {
+                state.wishlist.splice(idx, 1);
+                showToast("Removed from bookmarks");
+            } else {
+                state.wishlist.push(productId);
+                showToast("Item saved to bookmarks!");
+            }
+
+            localStorage.setItem("nexus_saved_items", JSON.stringify(state.wishlist));
+            updateWishlistBadge();
+            applyFilterAndRender();
+        }
+
+        function updateWishlistBadge() {
+            document.getElementById("wishlistBadge").innerText = state.wishlist.length;
+        }
+
+        function trackProductView(id) {
+            if (!state.recentlyViewed.includes(id)) {
+                state.recentlyViewed.unshift(id);
+                if (state.recentlyViewed.length > 5) state.recentlyViewed.pop();
+                localStorage.setItem("nexus_recent_items", JSON.stringify(state.recentlyViewed));
+                renderRecentlyViewed();
+            }
+        }
+
+        function renderRecentlyViewed() {
+            const container = document.getElementById("recentlyViewedContainer");
+            const section = document.getElementById("recentlyViewedSection");
+
+            if (state.recentlyViewed.length === 0) {
+                section.classList.add("hidden");
+                return;
+            }
+
+            section.classList.remove("hidden");
+            const items = state.recentlyViewed.map(id => window.PRODUCT_DATABASE.find(p => p.id === id)).filter(Boolean);
+
+            container.innerHTML = items.map(p => `
+                <div onclick="openQuickView('${p.id}')" class="min-w-[130px] sm:min-w-[150px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-2 cursor-pointer hover:border-blue-500 transition flex-shrink-0">
+                    <img src="${p.image}" class="w-full h-16 object-cover rounded-lg mb-1.5">
+                    <h5 class="text-[11px] font-bold text-slate-800 dark:text-white line-clamp-1">${p.name}</h5>
+                    <span class="text-[10px] font-extrabold text-emerald-500">${p.price === 0 ? 'FREE' : STORE_CONFIG.currency + p.price}</span>
+                </div>
+            `).join("");
+        }
+
+        function clearRecentlyViewed() {
+            state.recentlyViewed = [];
+            localStorage.removeItem("nexus_recent_items");
+            renderRecentlyViewed();
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 11. QUICK VIEW MODAL + IMAGE SLIDER + SHARE BUTTONS                        */
+        /* -------------------------------------------------------------------------- */
+        function openQuickView(id) {
+            trackProductView(id);
+            const p = window.PRODUCT_DATABASE.find(item => item.id === id);
+            if (!p) return;
+
+            currentModalImages = p.images && p.images.length ? p.images : [p.image];
+            currentSlideIndex = 0;
+
+            const isSaved = state.wishlist.includes(p.id);
+            const content = document.getElementById("quickViewContent");
+
+            // Build Image Slider HTML
+            const hasMultipleImages = currentModalImages.length > 1;
+
+            const dotsHTML = hasMultipleImages ? `
+                <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+                    ${currentModalImages.map((_, idx) => `
+                        <button onclick="setModalSlide(${idx})" id="modalDot-${idx}" class="w-2 h-2 rounded-full transition-all ${idx === 0 ? 'bg-blue-500 w-5' : 'bg-white/60 hover:bg-white'}"></button>
+                    `).join('')}
+                </div>
+            ` : '';
+
+            const arrowsHTML = hasMultipleImages ? `
+                <button onclick="changeModalSlide(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900/70 hover:bg-slate-900 text-white flex items-center justify-center text-xs z-10 transition shadow">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="changeModalSlide(1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900/70 hover:bg-slate-900 text-white flex items-center justify-center text-xs z-10 transition shadow">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            ` : '';
+
+            // Article Highlights list
+            const highlightsList = (p.highlights || [
+                "100% Verified & Safe Digital Asset",
+                "Instant Access / Direct Download Link",
+                "Full Features Unlocked & Tested"
+            ]).map(h => `<li class="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300 font-medium"><i class="fa-solid fa-circle-check text-emerald-500 text-xs"></i> ${h}</li>`).join('');
+
+            // Share URLs
+            const shareText = encodeURIComponent(`Check out "${p.name}" on NEXUS Digital Hub:`);
+            const pageUrl = encodeURIComponent(window.location.href);
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${shareText}%20${pageUrl}`;
+            const telegramUrl = `https://t.me/share/url?url=${pageUrl}&text=${shareText}`;
+
+            content.innerHTML = `
+                <div class="space-y-5">
+                    
+                    <!-- IMAGE SLIDER -->
+                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-inner group">
+                        <img id="modalSlideImage" src="${currentModalImages[0]}" alt="${p.name}" class="w-full h-full object-cover transition duration-300">
+                        <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider shadow">
+                            ${p.category}
+                        </span>
+                        ${arrowsHTML}
+                        ${dotsHTML}
+                    </div>
+
+                    <!-- ARTICLE HEADER -->
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <span class="text-xs font-black text-blue-500 uppercase tracking-wider">${p.brand}</span>
+                            <span class="text-xs font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-md flex items-center gap-1">
+                                <i class="fa-solid fa-star"></i> ${p.rating} (${p.reviews} ratings)
+                            </span>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white leading-tight mb-2">${p.name}</h2>
+                        
+                        <div class="flex items-center gap-3 text-sm font-extrabold mb-4">
+                            <span class="text-emerald-500 text-lg">${p.price === 0 ? 'FREE DOWNLOAD' : STORE_CONFIG.currency + p.price}</span>
+                            ${p.oldPrice ? `<span class="line-through text-slate-400 text-xs">${STORE_CONFIG.currency}${p.oldPrice}</span>` : ''}
+                            ${p.discount ? `<span class="bg-emerald-500/10 text-emerald-500 text-[10px] px-2 py-0.5 rounded-full">${p.discount}% OFF</span>` : ''}
+                        </div>
+                    </div>
+
+                    <!-- ARTICLE DESCRIPTION & HIGHLIGHTS -->
+                    <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-3">
+                        <h4 class="text-xs font-extrabold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-lines text-blue-500"></i> Overview & Details
+                        </h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">${p.description}</p>
+                        
+                        <div class="pt-2 border-t border-slate-200/60 dark:border-slate-700/60">
+                            <h5 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Key Highlights:</h5>
+                            <ul class="space-y-1.5">
+                                ${highlightsList}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SHARE BUTTONS SECTION (WHATSAPP, TELEGRAM & COPY) -->
+                    <div class="pt-2">
+                        <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider block mb-2">Share this post:</span>
+                        <div class="flex items-center gap-2">
+                            <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" 
+                               class="flex-1 py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition shadow">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                            </a>
+                            <a href="${telegramUrl}" target="_blank" rel="noopener noreferrer" 
+                               class="flex-1 py-2 px-3 bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition shadow">
+                                <i class="fa-brands fa-telegram text-sm"></i> Telegram
+                            </a>
+                            <button onclick="copyModalLink('${p.name}')" 
+                                    class="py-2 px-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition">
+                                <i class="fa-solid fa-copy"></i> Copy Link
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ACTION BUTTONS -->
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex gap-2">
+                        <a href="${p.url}" target="_blank" rel="noopener noreferrer" 
+                           class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-blue-600/20">
+                            <span>${p.actionText || 'Access Offer'}</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                        <button onclick="toggleWishlist('${p.id}'); closeQuickView();" 
+                                class="px-4 py-3 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 transition">
+                            <i class="${isSaved ? 'fa-solid text-pink-500' : 'fa-regular'} fa-bookmark text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById("quickViewModal").classList.remove("hidden");
+        }
+
+        // Modal Slider Logic
+        function changeModalSlide(dir) {
+            if (!currentModalImages.length) return;
+            currentSlideIndex = (currentSlideIndex + dir + currentModalImages.length) % currentModalImages.length;
+            updateModalSlideUI();
+        }
+
+        function setModalSlide(idx) {
+            currentSlideIndex = idx;
+            updateModalSlideUI();
+        }
+
+        function updateModalSlideUI() {
+            const imgEl = document.getElementById("modalSlideImage");
+            if (imgEl) imgEl.src = currentModalImages[currentSlideIndex];
+
+            currentModalImages.forEach((_, idx) => {
+                const dot = document.getElementById(`modalDot-${idx}`);
+                if (dot) {
+                    if (idx === currentSlideIndex) {
+                        dot.className = "w-5 h-2 rounded-full bg-blue-500 transition-all";
+                    } else {
+                        dot.className = "w-2 h-2 rounded-full bg-white/60 hover:bg-white transition-all";
+                    }
+                }
+            });
+        }
+
+        function closeQuickView() {
+            document.getElementById("quickViewModal").classList.add("hidden");
+        }
+
+        // Share & Clipboard Helpers
+        function copyModalLink(title) {
+            const textToCopy = `${title} - ${window.location.href}`;
+            const tempInput = document.createElement("textarea");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showToast("Link copied to clipboard!");
+        }
+
+        function showToast(message) {
+            const container = document.getElementById("toastContainer");
+            const toast = document.createElement("div");
+            
+            toast.className = `bg-slate-900 dark:bg-slate-800 text-slate-100 text-xs font-bold px-4 py-2.5 rounded-xl shadow-xl flex items-center space-x-2 transition duration-300 pointer-events-auto border border-slate-700`;
+            toast.innerHTML = `<span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add("opacity-0", "translate-y-2");
+                setTimeout(() => toast.remove(), 300);
+            }, 2200);
+        }
+
+        function scrollToGrid() {
+            document.getElementById("shopGridAnchor").scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
