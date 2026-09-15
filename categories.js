@@ -1,0 +1,3 @@
+window.CATEGORIES=[
+{id:'electronics',name:'Electronics',icon:'fa-mobile-screen-button',count:128},{id:'audio',name:'Audio',icon:'fa-headphones',count:74},{id:'computers',name:'Computers',icon:'fa-laptop',count:52},{id:'wearables',name:'Wearables',icon:'fa-clock',count:41},{id:'home',name:'Home',icon:'fa-house',count:96},{id:'kitchen',name:'Kitchen',icon:'fa-kitchen-set',count:67},{id:'gaming',name:'Gaming',icon:'fa-gamepad',count:33},{id:'fashion',name:'Fashion',icon:'fa-shirt',count:81},{id:'fitness',name:'Fitness',icon:'fa-dumbbell',count:38},{id:'travel',name:'Travel',icon:'fa-suitcase-rolling',count:29},{id:'office',name:'Office',icon:'fa-briefcase',count:45},{id:'accessories',name:'Accessories',icon:'fa-bag-shopping',count:112}
+];
