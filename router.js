@@ -1,0 +1,1 @@
+window.Router={params(){return new URLSearchParams(location.search)},product(){let q=this.params().get('id');return PRODUCTS.find(p=>String(p.id)===q||p.slug===q)},category(){return this.params().get('slug')},q(){return this.params().get('q')||''}};

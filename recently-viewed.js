@@ -1,0 +1,1 @@
+window.Recent={key:'nova_recent',get(){return JSON.parse(localStorage.getItem(this.key)||'[]')},add(id){id=Number(id);let a=this.get().filter(x=>x!==id);a.unshift(id);localStorage.setItem(this.key,JSON.stringify(a.slice(0,12)))} };
